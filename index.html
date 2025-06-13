@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Additionneur de nombres</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Addition de plusieurs nombres</h2>
+
+  <label>Combien de nombres voulez-vous additionner ?</label>
+  <input type="number" id="nbNombres" min="1">
+  <button onclick="genererChamps()">Générer</button>
+
+  <div id="zoneChamps"></div>
+
+  <button onclick="calculerSomme()" style="display:none;" id="btnCalcul">Calculer la somme</button>
+  <p id="resultat"></p>
+
+  <script>
+    function genererChamps() {
+      const zone = document.getElementById('zoneChamps');
+      const nb = parseInt(document.getElementById('nbNombres').value);
+      zone.innerHTML = "";
+      for (let i = 1; i <= nb; i++) {
+        const input = document.createElement("input");
+        input.type = "number";
+        input.placeholder = "Nombre #" + i;
+        input.className = "nombre";
+        zone.appendChild(input);
+        zone.appendChild(document.createElement("br"));
+      }
+      document.getElementById('btnCalcul').style.display = 'inline-block';
+    }
+
+    function calculerSomme() {
+      const inputs = document.getElementsByClassName('nombre');
+      let somme = 0;
+      for (let input of inputs) {
+        somme += parseFloat(input.value || 0);
+      }
+      document.getElementById('resultat').innerText = "La somme est : " + somme;
+    }
+  </script>
+</body>
+</html>
